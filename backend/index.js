@@ -3,7 +3,6 @@ const express = require('express');
 const app = express();
 const morgan = require('morgan');
 const cors = require('cors');
-const errorHandler = require('./helpers/errorHandler');
 
 //Importar routers
 const locationRouter = require('./routers/location');
@@ -17,7 +16,6 @@ app.options('*', cors());
 //Middlewares
 app.use(express.json());
 app.use(morgan('tiny'));
-app.use(errorHandler)
 
 const api = process.env.API_URL;
 const port = process.env.PORT? process.env.PORT : 3000;

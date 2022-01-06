@@ -1,11 +1,10 @@
 const express = require('express');
 const router = express.Router();
 const axios = require('axios');
+const currentUbicationURL = process.env.CURRENT_LOCATION;
+const apiKey = process.env.API_KEY;
 
 router.get(`/`,async (req, res) =>{
-    const currentUbicationURL = process.env.CURRENT_LOCATION;
-    const apiKey = process.env.API_KEY;
-    
     try{
         let currentLocation = await axios.get(`${currentUbicationURL}`);
         let currentCity = await currentLocation.data.city;
@@ -22,7 +21,6 @@ router.get(`/`,async (req, res) =>{
 
 router.get(`/:city`,async (req, res) =>{
     let city = req.params.city;
-    const apiKey = process.env.API_KEY;
     try{
         let optionalCityWeather = await axios.get(`http://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}`);
         res.status(200).send(optionalCityWeather.data)

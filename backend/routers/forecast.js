@@ -2,8 +2,11 @@ const express = require('express');
 const router = express.Router();
 
 router.get(`/`,async (req, res) =>{
-    //const usersList = await User.find().select('-password');
-    //!usersList? res.status(500).send('User not found'):res.status(200).send(usersList)
+    let currentCoordinate = {
+        lat:currentLocation.data.lat,
+        lon:currentLocation.data.lon
+    }
+    let currentUbicationData = await axios.get(`https://api.openweathermap.org/data/2.5/weather?lat=${currentCoordinate.lat}&lon=${currentCoordinate.lon}&appid=${apiKey}`)
 })
 
 module.exports = router

@@ -1,17 +1,21 @@
 const express = require('express');
 const router = express.Router();
-const currentUbicationData = process.env.CURRENT_UBICATION
 const axios = require('axios')
 
 router.get(`/`,async (req, res) =>{
-    let currentUbication = await axios.get(`${currentUbicationData}`)
-    let currentCoordinate = {
-        lat:currentUbication.data.lat,
-        lon:currentUbication.data.lon
+    const currentUbicationData = process.env.CURRENT_LOCATION
+    let apiKey = process.env.API_KEY
+    let currentLocation = await axios.get(`${currentUbicationData}`)
+    try{
+        let currentCoordinate = {
+            lat:currentLocation.data.lat,
+            lon:currentLocation.data.lon
+        }
+        let currentUbicationData = await axios.get(`https://api.openweathermap.org/data/2.5/weather?lat=${currentCoordinate.lat}&lon=${currentCoordinate.lon}&appid=${apiKey}`)
+        res.status(200).send(currentUbicationData.data)
+    }catch(error){
+        res.status(400).send(error)
     }
-    res.send(currentCoordinate)
-    //const usersList = await User.find().select('-password');
-    //!usersList? res.status(500).send('User not found'):res.status(200).send(usersList)
 })
 
 module.exports = router

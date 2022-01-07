@@ -1,6 +1,6 @@
 import { GET_CURRENT } from "./actions/actionTypes";
 
-let cities = []
+//let cities = []
 
 const initialState = {
     currentCity: [],

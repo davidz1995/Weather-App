@@ -11,7 +11,7 @@ function NavBar() {
         <div>
             <Navbar bg="light" expand="lg">
             <Container fluid>
-                <Navbar.Brand href="#">Weather App</Navbar.Brand>
+                <Navbar.Brand href="/">Weather App</Navbar.Brand>
                 <Navbar.Toggle aria-controls="navbarScroll" />
                 <Navbar.Collapse id="navbarScroll">
                 <Nav
@@ -19,7 +19,7 @@ function NavBar() {
                     style={{ maxHeight: '100px' }}
                     navbarScroll
                 >
-                    <Nav.Link href="#action1">Current</Nav.Link>
+                    <Nav.Link href="/">Current</Nav.Link>
                     <Nav.Link href="#action2">Forecast</Nav.Link>
                 </Nav>
                 <Form className="d-flex">

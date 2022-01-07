@@ -1,9 +1,9 @@
-import { GET_CURRENT } from "./actions/actionTypes";
-
-//let cities = []
+import { GET_CURRENT, GET_CURRENT_FORECAST, ADD_CITY } from "./actions/actionTypes";
 
 const initialState = {
+    cities: [],
     currentCity: [],
+    currentCityForecast: null
   };
 
 const reducer = (state = initialState, action) => {
@@ -13,7 +13,17 @@ const reducer = (state = initialState, action) => {
             ...state,
             currentCity: action.payload
         }
-      default:
+    case GET_CURRENT_FORECAST :
+        return {
+            ...state,
+            currentCityForecast: action.payload
+        }
+    case ADD_CITY :
+        return {
+            ...state,
+            cities: [...state.cities, action.payload]
+        }
+    default:
         return {
           ...state
         }

@@ -18,7 +18,7 @@ app.use(express.json());
 app.use(morgan('tiny'));
 
 const api = process.env.API_URL;
-const port = process.env.PORT? process.env.PORT : 3000;
+const port = process.env.PORT? process.env.PORT : 4000;
 
 //Routers
 app.use(`${api}/location`, locationRouter);

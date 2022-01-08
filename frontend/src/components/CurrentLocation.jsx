@@ -3,6 +3,7 @@ import Carousel from 'react-bootstrap/Carousel';
 import background from '../assets/background.jpg';
 import { useSelector } from 'react-redux';
 import { store } from '../redux/store'
+import Icons from './Icons';
 
 function CurrentLocation() {
 
@@ -25,14 +26,14 @@ function CurrentLocation() {
                 <img
                 className="d-block w-100"
                 src={background}
-                style={{height:'90vh'}}
+                style={{height:'91vh'}}
                 alt="background"
                 />
                 {currentLocation && show &&
                 <Carousel.Caption style={{fontSize:'1.3rem'}}>
                 <h1>{currentLocation.locationData.city}</h1>
                 <div style={{display:'flex', flexDirection:'row', justifyContent:'space-around'}}>
-                    <p>ICONO</p>
+                    <Icons props={currentLocation.currentCityWeather.weather[0].main}/>
                     <p style={{fontSize:'2.3rem', fontWeight:'bold'}}>{currentLocation.currentCityWeather.weather[0].main}</p>
                 </div>
                 <div style={{display:'flex', flexDirection:'row', justifyContent:'space-between'}}>
@@ -56,8 +57,8 @@ function CurrentLocation() {
                 <h1>{currentLocation.locationData.city}</h1>
                 <div style={{display:'flex', flexDirection:'row', justifyContent:'space-between'}}>
                     <p>Viento: {currentLocation.currentCityWeather.wind.speed}</p>
-                    <p>Altura a nivel del mar: {currentLocation.currentCityWeather.main.sea_level} m</p>
-                    <p>Presion: {currentLocation.currentCityWeather.main.pressure}</p>
+                    <p>Sensación térmica: {Math.ceil(currentLocation.currentCityWeather.main.feels_like - kelvinToCelcius)} &#8451;</p>
+                    <p>Presión: {currentLocation.currentCityWeather.main.pressure}</p>
                 </div>
                 </Carousel.Caption>
                 }

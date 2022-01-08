@@ -1,18 +1,15 @@
 import React, {useState} from 'react'
-import {useSelector} from 'react-redux'
+import { useSelector,useDispatch } from 'react-redux'
 import { store } from '../redux/store'
-//Icons
-//import WbSunnyIcon from '@mui/icons-material/WbSunny';
-//import AcUnitIcon from '@mui/icons-material/AcUnit';
-//import CloudIcon from '@mui/icons-material/Cloud';
-//import GrainIcon from '@mui/icons-material/Grain';
-//CSS
-//import '../styles/cards.css'
+import Card from 'react-bootstrap/Card';
+import Button from 'react-bootstrap/Button';
+import { deleteById } from '../redux/actions/actions'
 
 function Cards() {
 
     const [show, setShow] = useState(false);
     let kelvinToCelcius = 273.15 ;
+    const dispatch = useDispatch()
     
     const cities = useSelector(state => state.cities)
 
@@ -25,27 +22,37 @@ function Cards() {
 
     store.subscribe(refresh)
 
+    const handleClick = (e) => {
+        e.preventDefault();
+        dispatch(deleteById(e.target.value))
+    }
+
     return (
-        <div className='container_cards' style={{backgroundColor:'transparent'}}>
-            {cities.length && 
+        <div className='container_cards' style={{display:'flex', flexDirection:'row', flexWrap:'wrap'}}>
+            {cities.length?
                 cities.map((city, index) => {
                 return (
-                <div className='container_card' key={index}>
-                    <div className='name_card'>
-                        <p>{city.name}, {city.sys.country}</p>
-                    </div>
-                    <div className='subContainer_card'>
-                        <div>
-                            <p>{city.weather[0].main}</p>
-                            <h1>{Math.ceil(city.main.temp-kelvinToCelcius)} &#8451;</h1>
-                        </div>
-                    </div>
-                </div>
+                <Card key={index} style={{ 
+                    width: '18rem', 
+                    marginRight:'.5em', 
+                    marginTop:'1em', 
+                    marginBottom:'.5em', 
+                    backgroundColor:'rgba(255, 255, 255, 0.288)', 
+                    borderColor:'white'
+                }}>
+                <Card.Body>
+                    <Card.Title style={{fontWeight:'bold'}}>{city.name}, {city.sys.country}</Card.Title>
+                    <Card.Subtitle className="mb-2 text-muted" style={{fontWeight:'bold'}}>{city.weather[0].main}</Card.Subtitle>
+                    <Card.Text style={{fontWeight:'bold'}}>{Math.ceil(city.main.temp - kelvinToCelcius)} &#8451;</Card.Text>
+                    <Button variant="outline-dark" value={city.name} onClick={handleClick}>Eliminar</Button>
+                </Card.Body>
+                </Card>
+                )}
                 )
-            })
+                :null
             }
+        {show && null}
         </div>
-
     )
 }
 

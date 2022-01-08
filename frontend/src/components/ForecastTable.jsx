@@ -15,7 +15,7 @@ function ForecastTable() {
             <thead>
                 <tr>
                 <th>Fecha / Hora</th>
-                <th>Descripcion</th>
+                <th>Descripción</th>
                 <th>Temperatura</th>
                 <th>Temp Max</th>
                 <th>Temp Min</th>

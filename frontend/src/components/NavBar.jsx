@@ -1,23 +1,35 @@
 import React, {useState} from 'react'
-import { useDispatch } from 'react-redux';
-import { addCity } from '../redux/actions/actions'
+import { useDispatch, useSelector } from 'react-redux';
+import { addCity, deleteAll } from '../redux/actions/actions'
 import Navbar from 'react-bootstrap/Navbar';
 import Nav from 'react-bootstrap/Nav';
 import Container from 'react-bootstrap/Container';
 import Form from 'react-bootstrap/Form';
 import FormControl from 'react-bootstrap/FormControl';
 import Button from 'react-bootstrap/Button';
+import {Link} from 'react-router-dom'
 
 function NavBar() {
 
     const [city, setCity] = useState('')
+    const [showSearch, setShowSearch] = useState(true)
 
     const dispatch = useDispatch()
+    const cities = useSelector(state => state.cities)
 
     const handleClick = (e) => {
         e.preventDefault();
-        dispatch(addCity(city));
-        setCity('')
+        if(cities.length < 5){
+            dispatch(addCity(city));
+            setCity('')
+        } else {
+            alert('Puedes buscar máximo 5 ciudades.')
+        }
+    }
+
+    const handleClickForecast = () => {
+        setShowSearch(false);
+        dispatch(deleteAll())
     }
 
     return (
@@ -33,18 +45,28 @@ function NavBar() {
                 navbarScroll
             >
                 <Nav.Link href='/'>Ciudad actual</Nav.Link>
-                <Nav.Link href='/forecast'>Predicción (5 días)</Nav.Link>
+                <Link to='/forecast' onClick={handleClickForecast} style={{
+                    textDecoration:'none',
+                    color:'grey',
+                    marginTop:'.5em',
+                    marginLeft:'1em'
+                }}>
+                Pronóstico (5 días)
+                </Link>
             </Nav>
+            {showSearch &&
                 <Form className="d-flex">
                     <FormControl
                     type="search"
-                    placeholder="City..."
+                    placeholder="Ciudad..."
                     className="me-2"
+                    value={city}
                     aria-label="Search"
                     onChange={(e) => setCity(e.target.value)}
                     />
-                    <Button variant="outline-success" onClick={handleClick}>Search</Button>
+                    <Button variant="outline-success" onClick={handleClick}>Buscar</Button>
                 </Form>
+            }
                 </Navbar.Collapse>
             </Container>
             </Navbar>

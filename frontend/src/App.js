@@ -4,14 +4,14 @@ import ForecastTable from './components/ForecastTable';
 import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { getCurrent, getCurrentForecast } from './redux/actions/actions';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import './App.css';
+import Cards from './components/Cards';
 import {
   BrowserRouter as Router,
   Route,
   Routes
 } from "react-router-dom";
-import 'bootstrap/dist/css/bootstrap.min.css';
-import './App.css';
-import Cards from './components/Cards';
 
 function App() {
 
@@ -26,7 +26,17 @@ function App() {
     <Router>
       <div className="App">
       <NavBar/>
-      <Cards/>
+      <div style={{
+        display:'flex',
+        flexWrap:'wrap',
+        position:'absolute', 
+        zIndex:'1', 
+        marginLeft:'15%',
+        width:'70%',
+        justifyContent:'center', 
+        }}>
+        <Cards/>
+      </div>
       <Routes>
         <Route exact path="/" element={<CurrentLocation/>}/>
         <Route exact path="/forecast" element={<ForecastTable/>}/>

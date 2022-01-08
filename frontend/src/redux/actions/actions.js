@@ -1,4 +1,4 @@
-import { GET_CURRENT, GET_CURRENT_FORECAST, ADD_CITY } from "./actionTypes";
+import { GET_CURRENT, GET_CURRENT_FORECAST, ADD_CITY, DELETE_CITY, DELETE_ALL } from "./actionTypes";
 import axios from "axios";
 
 export const getCurrent = () => {
@@ -23,11 +23,24 @@ export const addCity = (name) => {
     return async (dispatch) => {
       if (name) {
         const response = await axios.get(`http://localhost:4000/v1/current/${name}`)
-        let error = [{name: 'Not found'}]
-        if(response.status === 200) dispatch({type: ADD_CITY, payload: response.data})
-        if(response.status === 404) dispatch({type: ADD_CITY, payload: error})
-      } 
+          if(response.status === 200) dispatch({type: ADD_CITY, payload: response.data})
+        }
+      }
     }
+
+export const deleteById = (name) => {
+    return async (dispatch) => {
+        if (name) {
+        dispatch({type: DELETE_CITY, payload:name})
+        } 
+    }
+}
+
+export const deleteAll = () => {
+  return async (dispatch) => {
+      dispatch({type: DELETE_ALL, payload:[]})
   }
+}
+
 
 

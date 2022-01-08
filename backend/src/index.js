@@ -18,7 +18,7 @@ app.use(express.json());
 app.use(morgan('tiny'));
 
 const api = process.env.API_URL;
-const port = process.env.PORT? process.env.PORT : 4000;
+const port = process.env.PORT? process.env.PORT : 8080;
 
 //Routers
 app.use(`${api}/location`, locationRouter);
@@ -29,3 +29,5 @@ app.use(`${api}/forecast`, forecastRouter);
 app.listen(port, ()=>{
     console.log(`Server is running in port ${port}`);
 })
+
+module.exports = app

@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React, {useState, useEffect} from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { addCity, deleteAll } from '../redux/actions/actions'
 import Navbar from 'react-bootstrap/Navbar';
@@ -18,7 +18,7 @@ function NavBar() {
     const cities = useSelector(state => state.cities)
 
     const handleClick = (e) => {
-        e.preventDefault();
+        //e.preventDefault();
         if(cities.length < 5){
             dispatch(addCity(city));
             setCity('')
@@ -31,6 +31,19 @@ function NavBar() {
         setShowSearch(false);
         dispatch(deleteAll())
     }
+
+    useEffect(() => {
+        const listener = event => {
+          if (event.code === "Enter" || event.code === "NumpadEnter") {
+            event.preventDefault()
+            handleClick()
+          }
+        };
+        document.addEventListener("keydown", listener);
+        return () => {
+          document.removeEventListener("keydown", listener);
+        };
+      }, [handleClick]);
 
     return (
         <div>
@@ -64,7 +77,10 @@ function NavBar() {
                     aria-label="Search"
                     onChange={(e) => setCity(e.target.value)}
                     />
-                    <Button variant="outline-success" onClick={handleClick}>Buscar</Button>
+                    <Button 
+                        variant="outline-success" 
+                        onClick={handleClick} 
+                        id='searchButton'>Buscar</Button>
                 </Form>
             }
                 </Navbar.Collapse>

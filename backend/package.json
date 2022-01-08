@@ -6,7 +6,7 @@
   "scripts": {
     "start": "nodemon src/index.js",
     "dev": "node src/index.js",
-    "test": "mocha src/tests/api.test.js --exit"
+    "test": "mocha src/tests/api.test.js --timeout 10000 --exit"
   },
   "keywords": [],
   "author": "",
@@ -20,5 +20,8 @@
     "morgan": "^1.10.0",
     "nodemon": "^2.0.15",
     "supertest": "^6.1.6"
+  },
+  "devDependencies": {
+    "should": "^13.2.3"
   }
 }

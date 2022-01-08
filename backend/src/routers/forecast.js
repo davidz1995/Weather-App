@@ -25,7 +25,7 @@ router.get(`/:city`,async (req, res) =>{
         let optionalCityWeatherFiveDaysForecast = await axios.get(`http://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=${apiKey}`);
         res.status(200).send(optionalCityWeatherFiveDaysForecast.data)
     }catch(error){
-        res.status(400).send(error.message)
+        res.status(404).json({message:'Ciudad no encontrada'})
     }
 })
 

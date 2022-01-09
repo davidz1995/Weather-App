@@ -6,7 +6,7 @@ Full stack project developed with ReactJS in the frontend and NodeJs in backend.
 - [ ] ReactJs
 - [ ] Redux
 - [ ] Bootstrap
-- [ j NodeJs
+- [ ] NodeJs
 - [ ] Express
 - [ ] Supertest
 - [ ] Should

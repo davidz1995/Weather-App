@@ -4,23 +4,33 @@ import background from '../assets/background.jpg';
 import { useSelector } from 'react-redux';
 import { store } from '../redux/store'
 import Icons from './Icons';
+import Alert from './Alert';
 
 function CurrentLocation() {
 
     const [show, setShow] = useState(false);
+    const [showAlert, setShowAlert] = useState(true)
 
     const currentLocation = useSelector(state => state.currentCity);
-
+    const alertMessage = useSelector(state => state.alert)
+ 
     let kelvinToCelcius = 273.15;
 
     const refresh = () => {
         setShow(true)
+        if(alertMessage.length){
+            setShowAlert(true)
+        }
     }
 
     store.subscribe(refresh)
 
     return (
         <div>
+            {alertMessage.length? 
+                <Alert message={alertMessage[0].message} show={showAlert}/>
+                :null
+            }
             <Carousel>
             <Carousel.Item id='currentCity'>
                 <img

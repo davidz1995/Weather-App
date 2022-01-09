@@ -37,7 +37,7 @@ function Cards() {
                     marginRight:'.5em', 
                     marginTop:'1em', 
                     marginBottom:'.5em', 
-                    backgroundColor:'rgba(255, 255, 255, 0.288)', 
+                    backgroundColor:'rgba(255, 255, 255, 0.700)', 
                     borderColor:'white'
                 }}>
                 <Card.Body>

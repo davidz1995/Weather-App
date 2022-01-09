@@ -1,9 +1,10 @@
-import { GET_CURRENT, GET_CURRENT_FORECAST, ADD_CITY, DELETE_CITY, DELETE_ALL } from "./actions/actionTypes";
+import { GET_CURRENT, GET_CURRENT_FORECAST, ADD_CITY, DELETE_CITY, DELETE_ALL, SET_ALERT, RESET_ALERT } from "./actions/actionTypes";
 
 const initialState = {
     cities: [],
     currentCity: [],
-    currentCityForecast: null
+    currentCityForecast: null,
+    alert: []
   };
 
 const reducer = (state = initialState, action) => {
@@ -31,7 +32,17 @@ const reducer = (state = initialState, action) => {
     case DELETE_ALL :
     return {
       ...state,
-      cities:action.payload
+      cities: action.payload
+    }
+    case SET_ALERT :
+    return {
+      ...state,
+      alert: action.payload
+    }
+    case RESET_ALERT :
+    return {
+      ...state,
+      alert: action.payload
     }
     default:
         return {

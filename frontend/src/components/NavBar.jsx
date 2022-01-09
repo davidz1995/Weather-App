@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react'
+import React, {useState, useEffect, useCallback} from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { addCity, deleteAll } from '../redux/actions/actions'
 import Navbar from 'react-bootstrap/Navbar';
@@ -17,15 +17,14 @@ function NavBar() {
     const dispatch = useDispatch()
     const cities = useSelector(state => state.cities)
 
-    const handleClick = (e) => {
-        //e.preventDefault();
+    const handleClickSearch = useCallback((e) => {
         if(cities.length < 5){
-            dispatch(addCity(city));
+            dispatch(addCity(city))
             setCity('')
         } else {
             alert('Puedes buscar máximo 5 ciudades.')
         }
-    }
+    },[cities.length, city, dispatch])
 
     const handleClickForecast = () => {
         setShowSearch(false);
@@ -36,14 +35,14 @@ function NavBar() {
         const listener = event => {
           if (event.code === "Enter" || event.code === "NumpadEnter") {
             event.preventDefault()
-            handleClick()
+            handleClickSearch()
           }
         };
         document.addEventListener("keydown", listener);
         return () => {
           document.removeEventListener("keydown", listener);
         };
-      }, [handleClick]);
+      }, [handleClickSearch]);
 
     return (
         <div>
@@ -79,7 +78,7 @@ function NavBar() {
                     />
                     <Button 
                         variant="outline-success" 
-                        onClick={handleClick} 
+                        onClick={handleClickSearch} 
                         id='searchButton'>Buscar</Button>
                 </Form>
             }

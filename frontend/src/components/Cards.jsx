@@ -3,7 +3,8 @@ import { useSelector,useDispatch } from 'react-redux'
 import { store } from '../redux/store'
 import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
-import { deleteById } from '../redux/actions/actions'
+import { deleteAll, deleteByName, numberOfCard, deleteByNameForecast } from '../redux/actions/actions'
+import { Link } from 'react-router-dom';
 
 function Cards() {
 
@@ -24,7 +25,13 @@ function Cards() {
 
     const handleClick = (e) => {
         e.preventDefault();
-        dispatch(deleteById(e.target.value))
+        dispatch(deleteByName(e.target.value))
+        dispatch(deleteByNameForecast(e.target.value))
+    }
+
+    const handleClickForecast = (e) => {
+        dispatch(numberOfCard(e.target.value))
+        dispatch(deleteAll())
     }
 
     return (
@@ -45,6 +52,7 @@ function Cards() {
                     <Card.Subtitle className="mb-2 text-muted" style={{fontWeight:'bold'}}>{city.weather[0].main}</Card.Subtitle>
                     <Card.Text style={{fontWeight:'bold'}}>{Math.ceil(city.main.temp - kelvinToCelcius)} &#8451;</Card.Text>
                     <Button variant="outline-dark" value={city.name} onClick={handleClick}>Eliminar</Button>
+                    <Link to='/selectedCityForecast'><Button value={index} onClick={handleClickForecast}>Ver pronostico</Button></Link>
                 </Card.Body>
                 </Card>
                 )}

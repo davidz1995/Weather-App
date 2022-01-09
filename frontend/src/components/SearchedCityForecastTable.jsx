@@ -1,18 +1,20 @@
 import React from 'react';
 import Table from 'react-bootstrap/Table';
+import Spinner from 'react-bootstrap/Spinner';
 import { useSelector } from 'react-redux';
 import NavBar from './NavBar';
 
-function ForecastTable() {
+function SearchedCityForecastTable() {
 
-    const currentLocationForecast = useSelector(state => state.currentCityForecast);
+    const selectedCityForecast = useSelector(state => state.selectedForecast);
+    const numberOfCard = useSelector(state => state.numberOfCard);
 
     let kelvinToCelcius = 273.15;
 
     return (
         <div>
         <NavBar showSearch={false}/>
-        {currentLocationForecast &&
+        {selectedCityForecast.length?
             <Table striped bordered hover>
             <thead>
                 <tr>
@@ -25,7 +27,7 @@ function ForecastTable() {
                 </tr>
             </thead>
             <tbody>
-                {currentLocationForecast.currentCityWeatherFiveDaysForecast.list.map((element, index) => {
+                {selectedCityForecast[+numberOfCard].list.map((element, index) => {
                     return(
                         <tr key={index}>
                         <td style={{fontSize:'.8rem'}}>{element.dt_txt}</td>
@@ -40,9 +42,13 @@ function ForecastTable() {
                 }
             </tbody>
             </Table>   
+            :
+            <Spinner animation="border" role="status">
+                <span className="visually-hidden">Loading...</span>
+            </Spinner>
         }
         </div>
     )
 }
 
-export default ForecastTable
+export default SearchedCityForecastTable

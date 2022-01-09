@@ -5,6 +5,7 @@ import { useSelector } from 'react-redux';
 import { store } from '../redux/store'
 import Icons from './Icons';
 import Alert from './Alert';
+import NavBar from './NavBar';
 
 function CurrentLocation() {
 
@@ -27,6 +28,7 @@ function CurrentLocation() {
 
     return (
         <div>
+            <NavBar showSearch={true}/>
             {alertMessage.length? 
                 <Alert message={alertMessage[0].message} show={showAlert}/>
                 :null

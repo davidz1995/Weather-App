@@ -4,8 +4,6 @@ import { useDispatch } from 'react-redux';
 import {resetAlert} from '../redux/actions/actions'
 
 function Alert(message) {
-    console.log(message)
-
     const dispatch = useDispatch()
  
     const handleClick = () => {

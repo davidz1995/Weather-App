@@ -1,18 +1,18 @@
-import React, {useState, useEffect, useCallback} from 'react'
+import React, {useState, useEffect, useCallback} from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { addCity, deleteAll } from '../redux/actions/actions'
+import { addCity, deleteAll, getCityForecast, deleteAllForecast } from '../redux/actions/actions';
+import {Link} from 'react-router-dom';
 import Navbar from 'react-bootstrap/Navbar';
 import Nav from 'react-bootstrap/Nav';
 import Container from 'react-bootstrap/Container';
 import Form from 'react-bootstrap/Form';
 import FormControl from 'react-bootstrap/FormControl';
 import Button from 'react-bootstrap/Button';
-import {Link} from 'react-router-dom'
 
-function NavBar() {
+function NavBar(props) {
 
     const [city, setCity] = useState('')
-    const [showSearch, setShowSearch] = useState(true)
+    const [showSearch, setShowSearch] = useState(props.showSearch)
 
     const dispatch = useDispatch()
     const cities = useSelector(state => state.cities)
@@ -20,17 +20,20 @@ function NavBar() {
     const handleClickSearch = useCallback((e) => {
         if(cities.length < 5){
             dispatch(addCity(city))
+            dispatch(getCityForecast(city))
             setCity('')
+            setShowSearch(true)
         } else {
             alert('Puedes buscar máximo 5 ciudades.')
         }
     },[cities.length, city, dispatch])
 
     const handleClickForecast = () => {
-        setShowSearch(false);
         dispatch(deleteAll())
+        dispatch(deleteAllForecast())
     }
 
+    //Permite usar tecla enter para buscar
     useEffect(() => {
         const listener = event => {
           if (event.code === "Enter" || event.code === "NumpadEnter") {
@@ -48,7 +51,7 @@ function NavBar() {
         <div>
             <Navbar bg="light" expand="lg">
             <Container fluid>
-                <Navbar.Brand href="/">Weather App</Navbar.Brand>
+                <Navbar.Brand href="/" onClick={() => dispatch(deleteAllForecast())}>Weather App</Navbar.Brand>
                 <Navbar.Toggle aria-controls="navbarScroll" />
                 <Navbar.Collapse id="navbarScroll">
                 <Nav
@@ -63,7 +66,7 @@ function NavBar() {
                     marginTop:'.5em',
                     marginLeft:'1em'
                 }}>
-                Pronóstico (5 días)
+                Pronóstico ciudad actual (5 días)
                 </Link>
             </Nav>
             {showSearch &&

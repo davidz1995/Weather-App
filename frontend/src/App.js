@@ -1,12 +1,12 @@
-import CurrentLocation from './components/CurrentLocation';
-import NavBar from './components/NavBar';
-import ForecastTable from './components/ForecastTable';
 import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
+import CurrentLocation from './components/CurrentLocation';
+import ForecastTable from './components/ForecastTable';
+import Cards from './components/Cards';
+import SearchedCityForecastTable from './components/SearchedCityForecastTable'
 import { getCurrent, getCurrentForecast } from './redux/actions/actions';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
-import Cards from './components/Cards';
 import {
   BrowserRouter as Router,
   Route,
@@ -25,7 +25,6 @@ function App() {
   return (
     <Router>
       <div className="App">
-      <NavBar/>
       <div style={{
         display:'flex',
         flexWrap:'wrap',
@@ -33,13 +32,15 @@ function App() {
         zIndex:'1', 
         marginLeft:'15%',
         width:'70%',
-        justifyContent:'center', 
+        justifyContent:'center',
+        top:'5em'
         }}>
         <Cards/>
       </div>
       <Routes>
         <Route exact path="/" element={<CurrentLocation/>}/>
         <Route exact path="/forecast" element={<ForecastTable/>}/>
+        <Route exact path="/selectedCityForecast" element={<SearchedCityForecastTable/>}/>
       </Routes>
       </div>
     </Router>

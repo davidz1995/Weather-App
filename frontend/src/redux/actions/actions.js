@@ -1,4 +1,4 @@
-import { GET_CURRENT, GET_CURRENT_FORECAST, ADD_CITY, DELETE_CITY, DELETE_ALL, RESET_ALERT, SET_ALERT} from "./actionTypes";
+import { GET_CURRENT, GET_CURRENT_FORECAST, ADD_CITY, DELETE_CITY, DELETE_ALL, RESET_ALERT, SET_ALERT, GET_SELECTED_FORECAST, SET_INDEX_CARD, DELETE_ALL_FORECAST, DELETE_CITY_FORECAST} from "./actionTypes";
 import axios from "axios";
 
 export const getCurrent = () => {
@@ -10,8 +10,6 @@ export const getCurrent = () => {
         let message = [{name: 'Not found'}]
         dispatch({type: GET_CURRENT, payload: message})
       }
-        
-        
     }
   }
 
@@ -41,7 +39,7 @@ export const addCity = (name) => {
     }
   }
 
-export const deleteById = (name) => {
+export const deleteByName = (name) => {
     return async (dispatch) => {
         if (name) {
         dispatch({type: DELETE_CITY, payload:name})
@@ -61,5 +59,40 @@ export const resetAlert = () => {
   }
 }
 
+export const getCityForecast = (name) => {
+  return async (dispatch) => {
+    if (name) {
+      try{
+        const response = await axios.get(`http://localhost:4000/v1/forecast/${name}`)
+        if(response.status === 200) dispatch({type: GET_SELECTED_FORECAST, payload: response.data})
+      } catch (error){
+        let message = [{name: 'Not found'}]
+        dispatch({type: GET_SELECTED_FORECAST, payload: message})
+      } 
+    }
+  }
+}
+
+export const numberOfCard = (number) => {
+  return async (dispatch) => {
+    if (number) {
+        dispatch({type: SET_INDEX_CARD, payload: number})
+    }
+  }
+}
+
+export const deleteAllForecast = () => {
+  return async (dispatch) => {
+      dispatch({type: DELETE_ALL_FORECAST, payload:null})
+  }
+}
+
+export const deleteByNameForecast = (name) => {
+  return async (dispatch) => {
+      if (name) {
+      dispatch({type: DELETE_CITY_FORECAST, payload:name})
+      } 
+  }
+}
 
 

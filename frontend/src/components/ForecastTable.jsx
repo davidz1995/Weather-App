@@ -13,6 +13,11 @@ function ForecastTable() {
         <div>
         <NavBar showSearch={false}/>
         {currentLocationForecast &&
+            <>
+            <div style={{display:'flex', flexDirection:'row', justifyContent:'center'}}>
+            <a href='/' style={{position:'relative', left:'-13em', top:'.2em', fontSize:'1.5rem', textDecoration:'none', color:'black'}}>Volver</a>
+            <h1>{currentLocationForecast.currentCityWeatherFiveDaysForecast.city.name} - Pronóstico 5 días</h1>
+            </div>
             <Table striped bordered hover>
             <thead>
                 <tr>
@@ -39,7 +44,8 @@ function ForecastTable() {
                 })
                 }
             </tbody>
-            </Table>   
+            </Table>  
+            </> 
         }
         </div>
     )

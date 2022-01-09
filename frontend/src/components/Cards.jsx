@@ -51,8 +51,8 @@ function Cards() {
                     <Card.Title style={{fontWeight:'bold'}}>{city.name}, {city.sys.country}</Card.Title>
                     <Card.Subtitle className="mb-2 text-muted" style={{fontWeight:'bold'}}>{city.weather[0].main}</Card.Subtitle>
                     <Card.Text style={{fontWeight:'bold'}}>{Math.ceil(city.main.temp - kelvinToCelcius)} &#8451;</Card.Text>
-                    <Button variant="outline-dark" value={city.name} onClick={handleClick}>Eliminar</Button>
-                    <Link to='/selectedCityForecast'><Button value={index} onClick={handleClickForecast}>Ver pronostico</Button></Link>
+                    <Link to='/selectedCityForecast'><Button value={index} onClick={handleClickForecast}>Ver pronóstico</Button></Link>
+                    <Button variant="outline-dark" value={city.name} onClick={handleClick} style={{marginLeft:'1em'}}>Eliminar</Button>
                 </Card.Body>
                 </Card>
                 )}

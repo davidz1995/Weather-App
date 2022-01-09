@@ -29,6 +29,6 @@ Full stack project developed with ReactJS in the frontend and NodeJs in backend.
 - [ ] Para iniciar servidor de frontend ejecutar $ npm start y estaría funcionando todo el proyecto.
 
 # Tests
-- [ ] Tests pueden ser ejecutados con el comendo $ npm test o $ npm run test
+- [ ] Tests pueden ser ejecutados con el comendo $ npm test o $ npm run test desde la carpeta backend.
 
 - [ ] El proyecto está deployado en este link : 

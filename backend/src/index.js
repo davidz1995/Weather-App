@@ -12,6 +12,10 @@ const forecastRouter = require('./routers/forecast');
 //Enable CORS
 app.use(cors());
 app.options('*', cors());
+let corsOptions = {
+    origin: 'https://weatherappch-davidz1995.vercel.app',
+    optionsSuccessStatus: 200
+}
 
 //Middlewares
 app.use(express.json());
@@ -21,9 +25,9 @@ const api = process.env.API_URL;
 const port = process.env.PORT? process.env.PORT : 4000;
 
 //Routers
-app.use(`${api}/location`, locationRouter);
-app.use(`${api}/current`, currentRouter);
-app.use(`${api}/forecast`, forecastRouter);
+app.use(`${api}/location`, cors(corsOptions), locationRouter);
+app.use(`${api}/current`, cors(corsOptions), currentRouter);
+app.use(`${api}/forecast`, cors(corsOptions), forecastRouter);
 
 //Inicio de servidor
 app.listen(port, ()=>{

@@ -30,5 +30,3 @@ Full stack project developed with ReactJS in the frontend and NodeJs in backend.
 
 # Tests
 - [ ] Tests pueden ser ejecutados con el comando $ npm test o $ npm run test desde la carpeta backend.
-
-- [ ] El proyecto está deployado en este link : https://weatherappch-davidz1995.vercel.app/ (Muestra ciudad actual según la IP del servidor de Heroku.)

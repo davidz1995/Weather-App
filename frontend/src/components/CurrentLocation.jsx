@@ -70,7 +70,7 @@ function CurrentLocation() {
                 <div style={{display:'flex', flexDirection:'row', justifyContent:'space-between'}}>
                     <p>Viento: {currentLocation.currentCityWeather.wind.speed}</p>
                     <p>Sensación térmica: {Math.ceil(currentLocation.currentCityWeather.main.feels_like - kelvinToCelcius)} &#8451;</p>
-                    <p>Presión: {currentLocation.currentCityWeather.main.pressure}</p>
+                    <p>Presión: {currentLocation.currentCityWeather.main.pressure} Pa</p>
                 </div>
                 </Carousel.Caption>
                 }

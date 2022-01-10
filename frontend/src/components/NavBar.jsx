@@ -52,7 +52,7 @@ function NavBar(props) {
         <div>
             <Navbar bg="light" expand="lg">
             <Container fluid>
-                <Link to='/current' style={{
+                <Link to='/current' onClick={handleClickForecast} style={{
                     textDecoration:'none',
                     color:'black',
                     marginTop:'.2em',
@@ -66,7 +66,7 @@ function NavBar(props) {
                 style={{ maxHeight: '100px' }}
                 navbarScroll
             >
-                <Link to='/current' style={{
+                <Link to='/current' onClick={handleClickForecast} style={{
                     textDecoration:'none',
                     color:'grey',
                     marginTop:'.5em',

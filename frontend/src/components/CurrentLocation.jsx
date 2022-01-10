@@ -38,7 +38,7 @@ function CurrentLocation() {
                 <img
                 className="d-block w-100"
                 src={background}
-                style={{height:'91vh'}}
+                style={{height:'95vh'}}
                 alt="background"
                 />
                 {currentLocation && show &&
@@ -61,7 +61,7 @@ function CurrentLocation() {
                 <img
                 className="d-block w-100"
                 src={background}
-                style={{height:'90vh'}}
+                style={{height:'95vh'}}
                 alt="background"
                 />
                 {currentLocation && show &&

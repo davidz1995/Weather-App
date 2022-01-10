@@ -5,6 +5,7 @@ import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
 import { deleteAll, deleteByName, numberOfCard, deleteByNameForecast } from '../redux/actions/actions'
 import { Link } from 'react-router-dom';
+import '../styles/cards.css'
 
 function Cards() {
 
@@ -39,7 +40,7 @@ function Cards() {
             {cities.length?
                 cities.map((city, index) => {
                 return (
-                <Card key={index} style={{ 
+                <Card className='card' key={index} style={{ 
                     width: '18rem', 
                     marginRight:'.5em', 
                     marginTop:'1em', 

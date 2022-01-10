@@ -12,9 +12,16 @@ const forecastRouter = require('./routers/forecast');
 //Enable CORS
 app.use(cors());
 app.options('*', cors());
-let corsOptions = {
-    origin: 'https://weatherappch-davidz1995.vercel.app',
-    optionsSuccessStatus: 200
+
+var whitelist = ['http://localhost:3000', 'https://weatherappch-davidz1995.vercel.app']
+var corsOptions = {
+  origin: function (origin, callback) {
+    if (whitelist.indexOf(origin) !== -1) {
+      callback(null, true)
+    } else {
+      callback(new Error('Not allowed by CORS'))
+    }
+  }
 }
 
 //Middlewares

@@ -52,7 +52,13 @@ function NavBar(props) {
         <div>
             <Navbar bg="light" expand="lg">
             <Container fluid>
-                <Navbar.Brand>Weather App</Navbar.Brand>
+                <Link to='/current' style={{
+                    textDecoration:'none',
+                    color:'black',
+                    marginTop:'.2em',
+                    marginLeft:'1em',
+                    fontSize:'1.3rem'
+                }}>Weather App</Link>
                 <Navbar.Toggle aria-controls="navbarScroll" />
                 <Navbar.Collapse id="navbarScroll">
                 <Nav

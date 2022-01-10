@@ -51,7 +51,7 @@ function NavBar(props) {
         <div>
             <Navbar bg="light" expand="lg">
             <Container fluid>
-                <Navbar.Brand href="/" onClick={() => dispatch(deleteAllForecast())}>Weather App</Navbar.Brand>
+                <Navbar.Brand>Weather App</Navbar.Brand>
                 <Navbar.Toggle aria-controls="navbarScroll" />
                 <Navbar.Collapse id="navbarScroll">
                 <Nav
@@ -59,7 +59,12 @@ function NavBar(props) {
                 style={{ maxHeight: '100px' }}
                 navbarScroll
             >
-                <Nav.Link href='/'>Ciudad actual</Nav.Link>
+                <Link to='/current' style={{
+                    textDecoration:'none',
+                    color:'grey',
+                    marginTop:'.5em',
+                    marginLeft:'1em'
+                }}>Ciudad actual</Link>
                 <Link to='/forecast' onClick={handleClickForecast} style={{
                     textDecoration:'none',
                     color:'grey',

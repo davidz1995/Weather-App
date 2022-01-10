@@ -1,11 +1,13 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Carousel from 'react-bootstrap/Carousel';
+import Spinner from 'react-bootstrap/Spinner';
 import background from '../assets/background.jpg';
 import { useSelector } from 'react-redux';
 import { store } from '../redux/store'
 import Icons from './Icons';
 import Alert from './Alert';
 import NavBar from './NavBar';
+import Cards from './Cards';
 
 function CurrentLocation() {
 
@@ -26,6 +28,13 @@ function CurrentLocation() {
 
     store.subscribe(refresh)
 
+    useEffect(() => {
+        return () => {
+            setShow(false);
+            setShowAlert(true)
+        };
+    }, []);
+
     return (
         <div>
             <NavBar showSearch={true}/>
@@ -33,6 +42,18 @@ function CurrentLocation() {
                 <Alert message={alertMessage[0].message} show={showAlert}/>
                 :null
             }
+            <div style={{
+                display:'flex',
+                flexWrap:'wrap',
+                position:'absolute', 
+                zIndex:'1', 
+                marginLeft:'15%',
+                width:'70%',
+                justifyContent:'center',
+                top:'5em'
+                }}>
+                <Cards/>
+            </div>
             <Carousel>
             <Carousel.Item id='currentCity'>
                 <img
@@ -41,7 +62,7 @@ function CurrentLocation() {
                 style={{height:'95vh'}}
                 alt="background"
                 />
-                {currentLocation && show &&
+                {currentLocation.locationData?
                 <Carousel.Caption style={{fontSize:'1.3rem'}}>
                 <h1>{currentLocation.locationData.city}</h1>
                 <div style={{display:'flex', flexDirection:'row', justifyContent:'space-around'}}>
@@ -55,6 +76,10 @@ function CurrentLocation() {
                     <p>Humedad: {currentLocation.currentCityWeather.main.humidity}</p>
                 </div>
                 </Carousel.Caption>
+                :
+                <Spinner animation="border" role="status">
+                    <span className="visually-hidden">Loading...</span>
+                </Spinner>
                 }
             </Carousel.Item>
             <Carousel.Item>
@@ -64,7 +89,7 @@ function CurrentLocation() {
                 style={{height:'95vh'}}
                 alt="background"
                 />
-                {currentLocation && show &&
+                {currentLocation.locationData&&
                 <Carousel.Caption style={{fontSize:'1.3rem'}}>
                 <h1>{currentLocation.locationData.city}</h1>
                 <div style={{display:'flex', flexDirection:'row', justifyContent:'space-between'}}>
@@ -76,6 +101,7 @@ function CurrentLocation() {
                 }
             </Carousel.Item>
             </Carousel>
+            {show && null}
         </div>
     )
 }

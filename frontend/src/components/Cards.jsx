@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React, {useState, useEffect } from 'react'
 import { useSelector,useDispatch } from 'react-redux'
 import { store } from '../redux/store'
 import Card from 'react-bootstrap/Card';
@@ -10,8 +10,9 @@ import '../styles/cards.css'
 function Cards() {
 
     const [show, setShow] = useState(false);
-    let kelvinToCelcius = 273.15 ;
     const dispatch = useDispatch()
+
+    let kelvinToCelcius = 273.15 ;
     
     const cities = useSelector(state => state.cities)
 
@@ -21,6 +22,12 @@ function Cards() {
             setShow(false)
         },500)
     }
+
+    useEffect(() => {
+        return () => {
+            setShow(false);
+        };
+    }, []);
 
     store.subscribe(refresh)
 

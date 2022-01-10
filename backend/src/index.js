@@ -13,17 +13,6 @@ const forecastRouter = require('./routers/forecast');
 app.use(cors());
 app.options('*', cors());
 
-var whitelist = ['http://localhost:3000', 'https://weatherappch-davidz1995.vercel.app']
-var corsOptions = {
-  origin: function (origin, callback) {
-    if (whitelist.indexOf(origin) !== -1) {
-      callback(null, true)
-    } else {
-      callback(new Error('Not allowed by CORS'))
-    }
-  }
-}
-
 //Middlewares
 app.use(express.json());
 app.use(morgan('tiny'));
@@ -32,9 +21,9 @@ const api = process.env.API_URL;
 const port = process.env.PORT? process.env.PORT : 4000;
 
 //Routers
-app.use(`${api}/location`, cors(corsOptions), locationRouter);
-app.use(`${api}/current`, cors(corsOptions), currentRouter);
-app.use(`${api}/forecast`, cors(corsOptions), forecastRouter);
+app.use(`${api}/location`, locationRouter);
+app.use(`${api}/current`, currentRouter);
+app.use(`${api}/forecast`, forecastRouter);
 
 //Inicio de servidor
 app.listen(port, ()=>{

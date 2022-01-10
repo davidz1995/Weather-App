@@ -6,6 +6,7 @@ import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
 import { deleteAll, deleteByName, numberOfCard, deleteByNameForecast } from '../redux/actions/actions'
 import '../styles/cards.css'
+import Spinner from 'react-bootstrap/esm/Spinner';
 
 function Cards() {
 
@@ -65,7 +66,8 @@ function Cards() {
                 </Card>
                 )}
                 )
-                :null
+                :
+                null
             }
         {show && null}
         </div>

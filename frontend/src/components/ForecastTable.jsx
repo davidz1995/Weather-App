@@ -1,18 +1,27 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import Spinner from 'react-bootstrap/esm/Spinner';
 import Table from 'react-bootstrap/Table';
-import { useSelector } from 'react-redux';
 import NavBar from './NavBar';
+import { getCurrent, getCurrentForecast } from '../redux/actions/actions';
 
 function ForecastTable() {
+
+    const dispatch = useDispatch()
 
     const currentLocationForecast = useSelector(state => state.currentCityForecast);
 
     let kelvinToCelcius = 273.15;
 
+    useEffect(() => {
+        dispatch(getCurrent())
+        dispatch(getCurrentForecast())
+    }, [dispatch]);
+
     return (
         <div>
         <NavBar showSearch={false}/>
-        {currentLocationForecast &&
+        {currentLocationForecast?
             <>
             <h1>{currentLocationForecast.currentCityWeatherFiveDaysForecast.city.name} - Pronóstico 5 días</h1>
             <Table striped bordered hover>
@@ -43,6 +52,10 @@ function ForecastTable() {
             </tbody>
             </Table>  
             </> 
+            :
+            <Spinner animation="border" role="status" style={{marginTop:'20%'}}>
+                <span className="visually-hidden">Loading...</span>
+            </Spinner>
         }
         </div>
     )

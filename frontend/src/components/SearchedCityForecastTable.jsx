@@ -16,10 +16,7 @@ function SearchedCityForecastTable() {
         <NavBar showSearch={false}/>
         {selectedCityForecast.length?
             <>
-            <div style={{display:'flex', flexDirection:'row', justifyContent:'center'}}>
-            <a href='/' style={{position:'relative', left:'-13em', top:'.2em', fontSize:'1.5rem', textDecoration:'none', color:'black'}}>Volver</a>
             <h1>{selectedCityForecast[+numberOfCard].city.name} - Pronóstico 5 días</h1>
-            </div>
             <Table striped bordered hover>
             <thead>
                 <tr>

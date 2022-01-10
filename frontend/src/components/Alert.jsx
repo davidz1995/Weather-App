@@ -1,7 +1,7 @@
 import React from 'react';
 import Button from 'react-bootstrap/esm/Button';
 import { useDispatch } from 'react-redux';
-import {resetAlert} from '../redux/actions/actions'
+import { resetAlert } from '../redux/actions/actions'
 
 function Alert(message) {
     const dispatch = useDispatch()

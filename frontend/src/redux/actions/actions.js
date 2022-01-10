@@ -66,8 +66,7 @@ export const getCityForecast = (name) => {
         const response = await axios.get(`http://localhost:4000/v1/forecast/${name}`)
         if(response.status === 200) dispatch({type: GET_SELECTED_FORECAST, payload: response.data})
       } catch (error){
-        let message = [{name: 'Not found'}]
-        dispatch({type: GET_SELECTED_FORECAST, payload: message})
+        return
       } 
     }
   }
@@ -83,7 +82,7 @@ export const numberOfCard = (number) => {
 
 export const deleteAllForecast = () => {
   return async (dispatch) => {
-      dispatch({type: DELETE_ALL_FORECAST, payload:null})
+      dispatch({type: DELETE_ALL_FORECAST, payload:[]})
   }
 }
 

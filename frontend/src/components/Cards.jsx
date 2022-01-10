@@ -2,11 +2,10 @@ import React, {useState, useEffect } from 'react'
 import { useSelector,useDispatch } from 'react-redux'
 import { store } from '../redux/store'
 import { Link } from 'react-router-dom';
+import { deleteAll, deleteByName, numberOfCard, deleteByNameForecast } from '../redux/actions/actions'
 import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
-import { deleteAll, deleteByName, numberOfCard, deleteByNameForecast } from '../redux/actions/actions'
 import '../styles/cards.css'
-import Spinner from 'react-bootstrap/esm/Spinner';
 
 function Cards() {
 
@@ -44,24 +43,34 @@ function Cards() {
     }
 
     return (
-        <div className='container_cards' style={{display:'flex', flexDirection:'row', flexWrap:'wrap'}}>
+        <div className='container_cards' style={{
+            display:'flex', 
+            flexDirection:'row', 
+            flexWrap:'wrap',
+            position:'absolute', 
+            zIndex:'1', 
+            width:'100%',
+            justifyContent:'center',
+            top:'7em'
+            }}>
             {cities.length?
                 cities.map((city, index) => {
                 return (
                 <Card className='card' key={index} style={{ 
-                    width: '18rem', 
+                    width: '10em', 
                     marginRight:'.5em', 
-                    marginTop:'1em', 
+                    marginTop:'.5em', 
                     marginBottom:'.5em', 
                     backgroundColor:'rgba(255, 255, 255, 0.700)', 
-                    borderColor:'white'
+                    borderColor:'white',
+                    
                 }}>
                 <Card.Body>
                     <Card.Title style={{fontWeight:'bold'}}>{city.name}, {city.sys.country}</Card.Title>
                     <Card.Subtitle className="mb-2 text-muted" style={{fontWeight:'bold'}}>{city.weather[0].main}</Card.Subtitle>
                     <Card.Text style={{fontWeight:'bold'}}>{Math.ceil(city.main.temp - kelvinToCelcius)} &#8451;</Card.Text>
-                    <Link to='/selectedCityForecast'><Button value={index} onClick={handleClickForecast}>Ver pronóstico</Button></Link>
-                    <Button variant="outline-dark" value={city.name} onClick={handleClick} style={{marginLeft:'1em'}}>Eliminar</Button>
+                    <Link to='/selectedCityForecast'><Button value={index} onClick={handleClickForecast}>Pronóstico</Button></Link>
+                    <Button variant="outline-dark" value={city.name} onClick={handleClick} style={{marginTop:'1em'}}>Eliminar</Button>
                 </Card.Body>
                 </Card>
                 )}

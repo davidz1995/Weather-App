@@ -48,18 +48,7 @@ function CurrentLocation() {
                 <Alert message={alertMessage[0].message} show={showAlert}/>
                 :null
             }
-            <div style={{
-                display:'flex',
-                flexWrap:'wrap',
-                position:'absolute', 
-                zIndex:'1', 
-                marginLeft:'15%',
-                width:'70%',
-                justifyContent:'center',
-                top:'5em'
-                }}>
-                <Cards/>
-            </div>
+            <Cards/>
             {currentLocation.locationData?
             <Carousel>
             <Carousel.Item id='currentCity'>

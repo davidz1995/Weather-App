@@ -1,7 +1,7 @@
 import React from 'react';
+import { useSelector } from 'react-redux';
 import Table from 'react-bootstrap/Table';
 import Spinner from 'react-bootstrap/Spinner';
-import { useSelector } from 'react-redux';
 import NavBar from './NavBar';
 
 function SearchedCityForecastTable() {

@@ -1,10 +1,10 @@
 import React, {useState, useEffect } from 'react'
 import { useSelector,useDispatch } from 'react-redux'
 import { store } from '../redux/store'
+import { Link } from 'react-router-dom';
 import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
 import { deleteAll, deleteByName, numberOfCard, deleteByNameForecast } from '../redux/actions/actions'
-import { Link } from 'react-router-dom';
 import '../styles/cards.css'
 
 function Cards() {

@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import Carousel from 'react-bootstrap/Carousel';
 import Spinner from 'react-bootstrap/Spinner';
-import background from '../assets/background.jpg';
 import { useSelector } from 'react-redux';
 import { store } from '../redux/store'
+import background from '../assets/background.jpg';
+//Componentes
 import Icons from './Icons';
 import Alert from './Alert';
 import NavBar from './NavBar';

@@ -1,8 +1,8 @@
 import React, { useEffect } from 'react'
 import { useDispatch } from 'react-redux';
-import { getCurrent, getCurrentForecast } from '../redux/actions/actions';
 import Button from 'react-bootstrap/Button';
 import { Link } from "react-router-dom";
+import { getCurrent, getCurrentForecast } from '../redux/actions/actions';
 import '../styles/landing.css'
 
 function Landing() {
